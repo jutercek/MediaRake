@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "WtY+4FBV5Ps=",
+  "dgSpecHash": "abF1m9s3Doo=",
   "success": true,
   "projectFilePath": "C:\\Users\\juter\\RiderProjects\\MediaRake\\MediaRake\\MediaRake.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\juter\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.2\\communitytoolkit.mvvm.8.4.2.nupkg.sha512",
     "C:\\Users\\juter\\.nuget\\packages\\newtonsoft.json\\13.0.5-beta1\\newtonsoft.json.13.0.5-beta1.nupkg.sha512"
   ],
   "logs": []
