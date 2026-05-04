@@ -9,7 +9,6 @@ C:\Users\juter\RiderProjects\MediaRake\MediaRake\obj\Debug\netcoreapp10.0-window
 C:\Users\juter\RiderProjects\MediaRake\MediaRake\obj\Debug\netcoreapp10.0-windows\MainWindow.g.cs
 C:\Users\juter\RiderProjects\MediaRake\MediaRake\obj\Debug\netcoreapp10.0-windows\App.g.cs
 C:\Users\juter\RiderProjects\MediaRake\MediaRake\obj\Debug\netcoreapp10.0-windows\MediaRake_MarkupCompile.cache
-C:\Users\juter\RiderProjects\MediaRake\MediaRake\obj\Debug\netcoreapp10.0-windows\MediaRake_MarkupCompile.lref
 C:\Users\juter\RiderProjects\MediaRake\MediaRake\obj\Debug\netcoreapp10.0-windows\MainWindow.baml
 C:\Users\juter\RiderProjects\MediaRake\MediaRake\obj\Debug\netcoreapp10.0-windows\MediaRake.g.resources
 C:\Users\juter\RiderProjects\MediaRake\MediaRake\obj\Debug\netcoreapp10.0-windows\MediaRake.GeneratedMSBuildEditorConfig.editorconfig
