@@ -63,9 +63,23 @@ public partial class MainViewModel : ObservableObject
     {
         if (string.IsNullOrWhiteSpace(name))
             return;
+        
+        if (selectedCategory == null)
+            return;
 
         var subcategory = new Subcategory { Name = name.Trim() };
-        Subcategories.Add(subcategory); //not correct
+        selectedCategory.Subcategories.Add(subcategory); //not correct
+        Save();
+    }
+    
+    // Remove subcategory
+    [RelayCommand]
+    private void DeleteSubcategory(Subcategory subcategory)
+    {
+        if (selectedCategory == null)
+            return;
+
+        selectedCategory.Subcategories.Remove(subcategory);
         Save();
     }
 }
