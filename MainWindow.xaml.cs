@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using MediaRake.ViewModels;
+using MediaRake.Models;
+using System.Collections.Generic;
 
 namespace MediaRake;
 
@@ -11,5 +13,19 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = _vm;
+    }
+    
+    private void NewList_Click(object sender, RoutedEventArgs e)
+    {
+        var request = new CreateListRequest
+        {
+            Name = "Test List",
+            Fields = new List<FieldDefinition>
+            {
+                new FieldDefinition { Name = "Story", Type = FieldType.Score },
+                new FieldDefinition { Name = "Overall", Type = FieldType.Score }
+            }
+        };
+        _vm.AddListCommand.Execute(request);
     }
 }

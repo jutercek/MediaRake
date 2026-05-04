@@ -10,11 +10,42 @@
         </Grid.ColumnDefinitions>
         
         <Border Grid.Column="0" Background="#1E1E2E">
+            <DockPanel>
+        
+                <TextBlock DockPanel.Dock="Top" 
+                           Text="MediaRake"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="16,16,16,8"/>
 
+                <Button DockPanel.Dock="Bottom"
+                        Content="+ New List"
+                        Margin="16,8,16,16"
+                        Padding="0,10"
+                        Background="#6C63FF"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Click="NewList_Click"/>
+
+                <ListBox ItemsSource="{Binding Lists}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         Margin="8,0,8,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"
+                                       Foreground="White"
+                                       Padding="8,6"
+                                       FontSize="13"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+        
+            </DockPanel>
         </Border>
 
         <Border Grid.Column="1" Background="#13131F">
-
         </Border>
         
     </Grid>
