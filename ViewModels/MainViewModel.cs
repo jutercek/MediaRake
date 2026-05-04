@@ -10,76 +10,145 @@ public partial class MainViewModel : ObservableObject
 {
     // We need an instance all the time even if empty
     [ObservableProperty]
-    private ObservableCollection<Category> categories = new();
-
-    // App needs to track this, even if empty for now
-    [ObservableProperty]
-    private Category? selectedCategory;
-
-    [ObservableProperty]
-    private Subcategory? selectedSubcategory;
+    private ObservableCollection<RatingList> lists = new();
 
     [ObservableProperty]
     private RatingList? selectedList;
-    
 
     private readonly DataService _dataService = new();
     // Constructor
     public MainViewModel()
     {
         var data = _dataService.Load();
-        categories = new ObservableCollection<Category>(data.Categories);
-    }
-    
-    // Add category
-    [RelayCommand]
-    private void AddCategory(string name)
-    {
-        if (string.IsNullOrWhiteSpace(name))
-            return;
-
-        var category = new Category { Name = name.Trim() };
-        Categories.Add(category);
-        Save();
+        lists = new ObservableCollection<RatingList>(data.Lists);
     }
 
     private void Save()
     {
-        var data = new AppData { Categories = Categories.ToList() };
+        var data = new AppData { Lists = Lists.ToList() };
         _dataService.Save(data);
     }
-    
-    //Delete category
+
     [RelayCommand]
-    private void DeleteCategory(Category category)
+    private void AddList(CreateListRequest request)
     {
-        Categories.Remove(category);
+        if (string.IsNullOrWhiteSpace(request.Name))
+            return;
+
+        var list = new RatingList
+        {
+            Name = request.Name.Trim(),
+            Fields = request.Fields
+        };
+
+        Lists.Add(list);
+        SelectedList = list;
+        Save();
+    }
+
+    [RelayCommand]
+    private void DeleteList(RatingList list)
+    {
+        Lists.Remove(list);
+
+        if (list == SelectedList)
+            SelectedList = null;
+
+        Save();
+    }
+
+    [RelayCommand]
+    private void AddItem(MediaItem item)
+    {
+        if (SelectedList == null)
+            return;
+
+        SelectedList.Items.Add(item);
         Save();
     }
     
-    // Add subcategory
     [RelayCommand]
-    private void AddSubcategory(string name)
+    private void DeleteItem(MediaItem item)
     {
-        if (string.IsNullOrWhiteSpace(name))
+        if (SelectedList == null)
+            return;
+
+        SelectedList.Items.Remove(item);
+        Save();
+    }
+
+    [RelayCommand]
+    private void AddTag(CreateTagRequest request)
+    {
+        if (string.IsNullOrWhiteSpace(request.Name))
+            return;
+
+        if (request.Item == null)
             return;
         
-        if (selectedCategory == null)
-            return;
+        var tag = new Tag
+        {
+            Name = request.Name.Trim()
+        };
+        
+        request.Item.Tags.Add(tag);
+        Save();
+    }
 
-        var subcategory = new Subcategory { Name = name.Trim() };
-        selectedCategory.Subcategories.Add(subcategory); //not correct
+    [RelayCommand]
+    private void DeleteTag(DeleteTagRequest request)
+    {
+        if (request.Tag == null)
+            return;
+        
+        if (request.Item == null)
+            return;
+        
+        request.Item.Tags.Remove(request.Tag);
         Save();
     }
     
-    // Remove subcategory
-    [RelayCommand]
-    private void DeleteSubcategory(Subcategory subcategory)
-    {
-        if (selectedCategory == null)
-            return;
+    // Sorting
+    
+    [ObservableProperty]
+    private string sortField = "";
 
-        selectedCategory.Subcategories.Remove(subcategory);
-        Save();
+    [ObservableProperty]
+    private bool sortAscending = true;
+    
+    public List<MediaItem> GetSortedItems()
+    {
+        if (SelectedList == null) return new List<MediaItem>();
+
+        var items = SelectedList.Items.ToList();
+
+        if (string.IsNullOrEmpty(SortField))
+            return items;
+
+        var sorted = items.OrderBy(item =>
+        {
+            if (!item.Values.TryGetValue(SortField, out var fieldValue))
+                return (object)"";
+
+            return fieldValue.Score.HasValue
+                ? (object)fieldValue.Score.Value
+                : fieldValue.Text ?? "";
+        });
+
+        return sortAscending
+            ? sorted.ToList()
+            : sorted.Reverse().ToList();
+    }
+    
+    [RelayCommand]
+    private void SortBy(string fieldName)
+    {
+        if (SortField == fieldName)
+            SortAscending = !SortAscending;
+        else
+        {
+            SortField = fieldName;
+            SortAscending = true;
+        }
     }
 }

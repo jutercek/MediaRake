@@ -19,12 +19,19 @@ public class FieldValue
     public string? Text { get; set; }
 }
 
+public class Tag
+{
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public string Name { get; set; } = "";
+    public string Color { get; set; } = "#FFFFFF";
+}
+
 public class MediaItem
 {
     public Guid Id { get; set; } = Guid.NewGuid(); // This is a unique ID identifier
     public string Title { get; set; } = "";
     public Dictionary<string, FieldValue> Values { get; set; } = new();
-    public List<string> Tags { get; set; } = new();
+    public List<Tag> Tags { get; set; } = new();
 }
 
 public class RatingList
@@ -35,24 +42,25 @@ public class RatingList
     public List<FieldDefinition> Fields { get; set; } = new();
 }
 
-public class Subcategory
-{
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public string Name { get; set; } = "";
-    public List<RatingList> Lists { get; set; } = new();
-
-}
-
-public class Category
-{
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public string Name { get; set; } = "";
-    public List<RatingList> Lists { get; set; } = new();
-    public List<Subcategory> Subcategories { get; set; } = new();
-
-}
-
 public class AppData
 {
-    public List<Category> Categories { get; set; } = new();
+    public List<RatingList> Lists { get; set; } = new();
+}
+
+public class CreateListRequest
+{
+    public string Name { get; set; } = "";
+    public List<FieldDefinition> Fields { get; set; } = new();
+}
+
+public class CreateTagRequest
+{
+    public string Name { get; set; } = "";
+    public MediaItem? Item { get; set; }
+}
+
+public class DeleteTagRequest
+{
+    public Tag? Tag { get; set; }
+    public MediaItem? Item { get; set; }
 }
