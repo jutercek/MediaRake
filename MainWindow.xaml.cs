@@ -28,4 +28,15 @@ public partial class MainWindow : Window
         };
         _vm.AddListCommand.Execute(request);
     }
+    
+    private void AddItem_Click(object sender, RoutedEventArgs e)
+    {
+        if (_vm.SelectedList == null) return;
+
+        var item = new MediaItem
+        {
+            Title = "Test Item"
+        };
+        _vm.AddItemCommand.Execute(item);
+    }
 }

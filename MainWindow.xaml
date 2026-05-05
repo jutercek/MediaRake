@@ -29,6 +29,7 @@
                         Click="NewList_Click"/>
 
                 <ListBox ItemsSource="{Binding Lists}"
+                         SelectedItem="{Binding SelectedList}"
                          Background="Transparent"
                          BorderThickness="0"
                          Margin="8,0,8,0">
@@ -46,6 +47,42 @@
         </Border>
 
         <Border Grid.Column="1" Background="#13131F">
+            <DockPanel Margin="16">
+        
+                <!-- List title -->
+                <TextBlock DockPanel.Dock="Top"
+                           Text="{Binding SelectedList.Name}"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="0,0,0,16"/>
+
+                <!-- Add item button -->
+                <Button DockPanel.Dock="Top"
+                        Content="+ Add Item"
+                        HorizontalAlignment="Left"
+                        Padding="16,8"
+                        Margin="0,0,0,16"
+                        Background="#6C63FF"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Click="AddItem_Click"/>
+
+                <!-- Items list -->
+                <ListBox ItemsSource="{Binding SelectedList.Items}"
+                         Background="Transparent"
+                         BorderThickness="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"
+                                       Foreground="White"
+                                       Padding="8,6"
+                                       FontSize="13"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </DockPanel>
         </Border>
         
     </Grid>
