@@ -1,5 +1,7 @@
 ﻿namespace MediaRake.Models;
 
+using System.Collections.ObjectModel;
+
 public enum FieldType
 {
     Score,
@@ -38,7 +40,7 @@ public class RatingList
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = "";
-    public List<MediaItem> Items { get; set; } = new();
+    public ObservableCollection<MediaItem> Items { get; set; } = new();
     public List<FieldDefinition> Fields { get; set; } = new();
 }
 

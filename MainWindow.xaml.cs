@@ -31,12 +31,17 @@ public partial class MainWindow : Window
     
     private void AddItem_Click(object sender, RoutedEventArgs e)
     {
-        if (_vm.SelectedList == null) return;
+        if (_vm.SelectedList == null)
+        {
+            //MessageBox.Show("No list selected");
+            return;
+        }
 
         var item = new MediaItem
         {
             Title = "Test Item"
         };
         _vm.AddItemCommand.Execute(item);
+        //MessageBox.Show($"Items count: {_vm.SelectedList.Items.Count}");
     }
 }

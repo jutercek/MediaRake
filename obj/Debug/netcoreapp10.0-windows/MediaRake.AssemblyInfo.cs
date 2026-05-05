@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MediaRake")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa66f43b6e88d75cff03b5e0917c0d08750596fd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3224a4c2a697ee088fda52cdd83f99278f3d80bf")]
 [assembly: System.Reflection.AssemblyProductAttribute("MediaRake")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MediaRake")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
